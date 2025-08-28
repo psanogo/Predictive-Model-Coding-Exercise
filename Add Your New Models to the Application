@@ -1,0 +1,35 @@
+app.py
+
+-0+4
+
+The code change produced by Gemini cannot be automatically applied. You can manually apply the change or ask Gemini to try again.
+
+Show full code block
+
+from matchpredictor.evaluation.evaluator import Evaluator
+
+from matchpredictor.matchresults.results_provider import training_results
+
+from matchpredictor.predictors.past_results_predictor import PastResultsPredictor
+
+from matchpredictor.predictors.alphabet_predictor import AlphabetPredictor
+
+from matchpredictor.predictors.home_advantage_predictor import HomeAdvantagePredictor
+
+from matchpredictor.predictors.linear_regression_predictor import LinearRegressionPredictor
+
+
+
+def __init__(self) -> None:
+
+self.models = {
+
+'past_results': PastResultsPredictor(training_results),
+
+'alphabet': AlphabetPredictor(),
+
+'home_advantage': HomeAdvantagePredictor(),
+
+'linear_regression': LinearRegressionPredictor(training_results),
+
+}
