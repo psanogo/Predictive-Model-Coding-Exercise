@@ -1,0 +1,25 @@
+# backend/matchpredictor/predictors/alphabet_predictor.py
+
+
+from matchpredictor.matchresults.result import Prediction, Outcome
+
+from matchpredictor.predictors.predictor import Predictor
+
+
+class AlphabetPredictor(Predictor):
+
+"""
+
+A predictor that assumes the team that is first alphabetically will win.
+
+"""
+
+def predict(self, match) -> Prediction:
+
+if match.home_team.name < match.away_team.name:
+
+return Prediction(outcome=Outcome.HOME)
+
+else:
+
+return Prediction(outcome=Outcome.AWAY)
