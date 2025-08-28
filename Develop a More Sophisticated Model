@@ -1,0 +1,64 @@
+# backend/matchpredictor/predictors/home_advantage_predictor.py
+
+
+from matchpredictor.matchresults.result import Prediction, Outcome
+
+from matchpredictor.predictors.predictor import Predictor
+
+
+class HomeAdvantagePredictor(Predictor):
+
+"""
+
+A simple predictor that always assumes the home team will win.
+
+"""
+
+def predict(self, match) -> Prediction:
+
+return Prediction(outcome=Outcome.HOME)
+
+
+Next, create a test for it in backend/test/predictors/. Home advantage is a real phenomenon, so we can expect an accuracy of over 40%.
+
+Create a new file test_home_advantage_predictor.py:
+
+python
+
+Show full code block
+
+# backend/test/predictors/test_home_advantage_predictor.py
+
+
+import unittest
+
+
+from matchpredictor.evaluation.evaluator import Evaluator
+
+from matchpredictor.matchresults.results_provider import training_results
+
+from matchpredictor.predictors.home_advantage_predictor import HomeAdvantagePredictor
+
+
+
+class TestHomeAdvantagePredictor(unittest.TestCase):
+
+def test_accuracy_for_2021_season(self):
+
+# Arrange
+
+season = "2021"
+
+training_data = training_results("england", 1, season)
+
+predictor = HomeAdvantagePredictor()
+
+
+# Act
+
+evaluation = Evaluator(predictor).measure_accuracy(training_data)
+
+
+# Assert: Home advantage should give us better than 40% accuracy
+
+self.assertGreaterEqual(evaluation.accuracy, 0.40)
