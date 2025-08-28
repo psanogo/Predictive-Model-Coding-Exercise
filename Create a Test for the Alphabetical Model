@@ -1,0 +1,37 @@
+# backend/test/predictors/test_alphabet_predictor.py
+
+
+import unittest
+
+
+from matchpredictor.evaluation.evaluator import Evaluator
+
+from matchpredictor.matchresults.results_provider import training_results
+
+from matchpredictor.predictors.alphabet_predictor import AlphabetPredictor
+
+
+
+class TestAlphabetPredictor(unittest.TestCase):
+
+def test_accuracy(self):
+
+# Arrange
+
+season = "2021"
+
+training_data = training_results("england", 1, season)
+
+predictor = AlphabetPredictor()
+
+
+# Act: Use the Evaluator to measure the predictor's performance
+
+evaluation = Evaluator(predictor).measure_accuracy(training_data)
+
+
+# Assert: Check if the accuracy is at least 33%
+
+# This is a low bar, suitable for a simplistic model.
+
+self.assertGreaterEqual(evaluation.accuracy, 0.33)
